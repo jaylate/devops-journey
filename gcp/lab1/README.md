@@ -10,7 +10,7 @@
 
 ## Architecture
 - Deploys a VM with a public external IP in a VPC network using a custom instance template
-- Firewall rules allow HTTP, ICMP and SSH traffic
+- Firewall rules allow HTTP, ICMP, and SSH traffic
 
 ## Progress
 - Set up a configurable deployment with variables and use the smallest VM size to minimize cost
