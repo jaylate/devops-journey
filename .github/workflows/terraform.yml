@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        project: ${{ fromJSON(needs.find-projects.outputs.matrix }}
+        project: ${{ fromJSON(needs.find-projects.outputs.matrix) }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
