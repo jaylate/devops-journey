@@ -20,3 +20,4 @@
 - Migrate from resources to modules in Terraform
 - Explicitly define firewall rules with names, directions, and source ranges
 - Set up startup-script to install nginx and modify index.html on VM creation
+- Migrate to remote state storage

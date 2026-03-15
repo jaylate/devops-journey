@@ -8,6 +8,6 @@ terraform {
   }
   backend "gcs" {
     bucket = "devops-journey-state-storage"
-    prefix = "lab1"
+    prefix = "infra"
   }
 }
