@@ -20,7 +20,7 @@ jobs:
         id: gen-matrix
         run: |
           TFDIRS_JSON=$(find . -name "*.tf" -not -path "*/.terraform/*" -exec dirname {} \; | uniq | jq -R | jq -sc)
-          echo "matrix={\"project\":$TFDIRS_JSON}" >> "$GITHUB_OUTPUT"
+          echo "matrix=$TFDIRS_JSON" >> "$GITHUB_OUTPUT"
 
   terraform:
     needs: find-projects
