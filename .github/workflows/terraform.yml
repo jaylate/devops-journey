@@ -1,0 +1,63 @@
+name: Terraform validation and plan
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  find-projects:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.gen-matrix.outputs.matrix }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Generate matrix of Terraform projects
+        id: gen-matrix
+        run: |
+          TFDIRS_JSON=$(find . -name "*.tf" -not -path "*/.terraform/*" -exec dirname {} \; | uniq | jq -R | jq -s)
+          echo "matrix={ \"project\": $TFDIRS_JSON }" >> "$GITHUB_OUTPUT"
+
+  terraform:
+    needs: find-projects
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        project: ${{ fromJSON(needs.find-projects.outputs.matrix }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: 'google-github-actions/auth@v3'
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_ACTIONS_SERVICE_ACCOUNT }}
+          create_credentials_file: true
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v4
+
+      - name: Terraform fmt
+        id: fmt
+        run: terraform fmt -check
+        continue-on-error: true
+        working-directory: ${{ matrix.project }}
+      - name: Teraform init
+        id: init
+        run: terraform init -input=false
+        working-directory: ${{ matrix.project }}
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+        working-directory: ${{ matrix.project }}
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -no-color -input=false
+        continue-on-error: true
+        working-directory: ${{ matrix.project }}

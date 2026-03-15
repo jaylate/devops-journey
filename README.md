@@ -6,3 +6,6 @@ This is a repository where I will store my progress on studying DevOps tools and
 - [Scripts](scripts/) - General helper scripts, such as `pre-commit` hook (copy to `.git/hooks/pre-commit` on contribution) which checks formatting and validation of Terraform files
 - [GCP](gcp/) - Google Cloud Platform practice labs
 - [Terraform](terraform/) - General Terraform practice
+
+## CI
+- On each push Terraform's `fmt/init/validate/plan` is executed
