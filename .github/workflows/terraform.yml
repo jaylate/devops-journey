@@ -19,7 +19,7 @@ jobs:
       - name: Generate matrix of Terraform projects
         id: gen-matrix
         run: |
-          TFDIRS_JSON=$(find . -name "*.tf" -not -path "*/.terraform/*" -exec dirname {} \; | uniq | jq -R | jq -sc)
+          TFDIRS_JSON=$(find gcp -name "*.tf" -not -path "*/.terraform/*" -exec dirname {} \; | uniq | jq -R | jq -sc)
           echo "matrix=$TFDIRS_JSON" >> "$GITHUB_OUTPUT"
 
   terraform:
@@ -58,6 +58,6 @@ jobs:
         working-directory: ${{ matrix.project }}
       - name: Terraform Plan
         id: plan
-        run: terraform plan -no-color -input=false
+        run: terraform plan -no-color -input=false -var=project=${{ secrets.GCP_PROJECT }}
         continue-on-error: true
         working-directory: ${{ matrix.project }}
