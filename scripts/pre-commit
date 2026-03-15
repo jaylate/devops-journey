@@ -1,0 +1,10 @@
+#!/bin/sh
+
+tfdirs=$(find . -name "*.tf" -not -path "*/.terraform/*" -exec dirname {} \; | uniq)
+
+for dir in $tfdirs; do
+  terraform fmt -check $dir || exit 1
+  pushd "$dir"
+  terraform validate || exit 1
+  popd
+done
