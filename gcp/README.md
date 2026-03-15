@@ -4,4 +4,4 @@
 - Practice skills learnt through the Google Cloud Skill Boost courses
 
 # Progress
-- [lab1/] - simple configurable VM deployment
+- [lab1/] - Deployment of a VM with nginx set up

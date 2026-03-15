@@ -30,6 +30,10 @@ module "instance_template" {
   source_image_project = "debian-cloud"
   source_image_family  = "debian-13"
 
+  metadata = {
+    startup-script = file("${path.module}/startup.sh")
+  }
+
   network = module.vpc.network_name
   # If nat_ip is not set, the VM gets an ephemeral external IP
   access_config = [{

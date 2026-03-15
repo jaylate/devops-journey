@@ -9,7 +9,7 @@
 - Three firewall rules
 
 ## Architecture
-- Deploys a VM with a public external IP in a VPC network using a custom instance template
+- Deploys a VM with a public web page on external IP in a VPC network using a custom instance template
 - Firewall rules allow HTTP, ICMP, and SSH traffic
 
 ## Progress
@@ -19,3 +19,4 @@
   - Firewall rules control which inbound traffic can reach the VM
 - Migrate from resources to modules in Terraform
 - Explicitly define firewall rules with names, directions, and source ranges
+- Set up startup-script to install nginx and modify index.html on VM creation

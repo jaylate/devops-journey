@@ -1,16 +1,16 @@
 variable "project" {
-  type = "string"
+  type        = string
   description = "Specify your Project ID"
 }
 
 variable "region" {
-  type = "string"
+  type        = string
   description = "Specify desired default region"
-  default = "us-central1"
+  default     = "us-central1"
 }
 
 variable "zone" {
-  type = "string"
+  type        = string
   description = "Specify desired default zone"
-  default = "us-central1-c"
+  default     = "us-central1-c"
 }
