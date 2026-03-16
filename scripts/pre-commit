@@ -1,10 +1,11 @@
 #!/bin/sh
 
-tfdirs=$(find . -name "*.tf" -not -path "*/.terraform/*" -exec dirname {} \; | uniq)
+changed_files=$(git diff --cached --name-only -- '*.tf')
+tfdirs=$(echo "$changed_files" | xargs -I{} dirname {} | sort -u)
 
 for dir in $tfdirs; do
-  terraform fmt -check $dir || exit 1
   pushd "$dir"
   terraform validate || exit 1
   popd
+  terraform fmt -check $dir || exit 1
 done
