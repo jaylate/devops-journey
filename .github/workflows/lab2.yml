@@ -35,4 +35,4 @@ jobs:
         with:
           context: gcp/lab2
           push: true
-          tags: us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID}}/devops-journey-repository/simple-app:latest
+          tags: us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/devops-journey-repository/simple-app:latest
