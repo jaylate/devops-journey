@@ -16,3 +16,9 @@ resource "google_storage_bucket" "state-storage" {
     enabled = true
   }
 }
+
+resource "google_artifact_registry_repository" "repository" {
+  location      = var.region
+  repository_id = "devops-journey-repository"
+  format        = "DOCKER"
+}
