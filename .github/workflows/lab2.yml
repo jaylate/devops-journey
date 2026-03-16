@@ -5,6 +5,7 @@ on:
       - 'gcp/lab2/**'
     branches:
       - main
+  workflow_dispatch:
 
 permissions:
   contents: read
