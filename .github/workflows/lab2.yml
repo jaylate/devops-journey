@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - 'gcp/lab2/**'
+      - '!gcp/lab2/**/*.md'
     branches:
       - main
   workflow_dispatch:

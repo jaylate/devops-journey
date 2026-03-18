@@ -5,6 +5,7 @@ on:
       - main
     paths:
       - '**/*.tf'
+      - '!**/*.md'
 
 permissions:
   contents: read
