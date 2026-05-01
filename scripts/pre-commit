@@ -1,11 +1,21 @@
 #!/bin/sh
 
-changed_files=$(git diff --cached --name-only -- '*.tf')
-tfdirs=$(echo "$changed_files" | xargs -I{} dirname {} | sort -u)
+changed_tf_files=$(git diff --cached --name-only -- '*.tf')
+tfdirs=$(echo "$changed_tf_files" | xargs -I{} dirname {} | sort -u)
 
 for dir in $tfdirs; do
   pushd "$dir"
   terraform validate || exit 1
   popd
   terraform fmt -check $dir || exit 1
+done
+
+changed_pkr_files=$(git diff --cached --name-only -- '*.pkr.hcl')
+pkrdirs=$(echo "$changed_pkr_files" | xargs -I{} dirname {} | sort -u)
+
+for dir in $pkrdirs; do
+  pushd "$dir"
+  packer validate || exit 1
+  popd
+  packer fmt -check $dir || exit 1
 done

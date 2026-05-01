@@ -9,7 +9,7 @@ Personal DevOps practice repository (Cloud, IaC, CI/CD)
 
 ### [Terraform](terraform/) - General Terraform practice
 ### [Scripts](scripts/) - Helper scripts
-- General helper scripts, such as `pre-commit` hook (copy to `.git/hooks/pre-commit` on contribution) which checks formatting and validation of Terraform files
+- General helper scripts, such as `pre-commit` hook (copy to `.git/hooks/pre-commit` on contribution) which checks formatting and validation of Terraform/Packer files
 
 ## CI/CD (Github Actions with Workload Identity authentication)
 - Terraform validation on push workflow
