@@ -1,5 +1,5 @@
 provider "google" {
-  project = var.project
+  project = var.project_id
   region  = var.region
   zone    = var.zone
 }
@@ -8,7 +8,7 @@ module "vpc" {
   source  = "terraform-google-modules/network/google//modules/vpc"
   version = "~> 16.1"
 
-  project_id = var.project
+  project_id = var.project_id
 
   network_name = "terraform-network"
   # Required when subnets are not defined explicitly
@@ -20,19 +20,14 @@ module "instance_template" {
   source  = "terraform-google-modules/vm/google//modules/instance_template"
   version = "~> 15.0"
 
-  project_id = var.project
+  project_id = var.project_id
   region     = var.region
 
   machine_type = "e2-micro"
   tags         = ["web"]
 
-  # Equivalent to "debian-cloud/debian-13"
-  source_image_project = "debian-cloud"
-  source_image_family  = "debian-13"
-
-  metadata = {
-    startup-script = file("${path.module}/startup.sh")
-  }
+  source_image_family  = var.image_family
+  source_image_project = var.project_id
 
   network = module.vpc.network_name
   # If nat_ip is not set, the VM gets an ephemeral external IP
@@ -45,7 +40,7 @@ module "compute_instance" {
   source  = "terraform-google-modules/vm/google//modules/compute_instance"
   version = "~> 15.0"
 
-  project_id = var.project
+  project_id = var.project_id
   region     = var.region
   zone       = var.zone
   hostname   = "terraform-instance"
@@ -58,7 +53,7 @@ module "firewall_rules" {
   source  = "terraform-google-modules/network/google//modules/firewall-rules"
   version = "~> 16.1"
 
-  project_id   = var.project
+  project_id   = var.project_id
   network_name = module.vpc.network_name
 
   rules = [

@@ -3,12 +3,6 @@ variable "project_id" {
   description = "Specify your Project ID"
 }
 
-variable "region" {
-  type        = string
-  description = "Specify desired default region"
-  default     = "us-central1"
-}
-
 variable "zone" {
   type        = string
   description = "Specify desired default zone"
@@ -16,7 +10,7 @@ variable "zone" {
 }
 
 variable "image_family" {
-  type        = string
+  type = string
   description = "Specify image family of prebuilt image"
-  default     = "my-httpd"
+  default = "my-httpd"
 }
