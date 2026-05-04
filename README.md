@@ -6,6 +6,7 @@ Personal DevOps practice repository (Cloud, IaC, CI/CD)
 ### [GCP](gcp/) - Google Cloud Platform practice
 - [Lab 1](gcp/lab1/) - VM with nginx (Terraform, Packer)
 - [Lab 2](gcp/lab2/) - Go app on Cloud Run (Terraform)
+- [Lab 3](gcp/lab3/) - GKE Autopilot cluster (Terraform)
 
 ### [Terraform](terraform/) - General Terraform practice
 ### [Scripts](scripts/) - Helper scripts
