@@ -1,0 +1,6 @@
+Deployed {{ .Release.Name }}!
+Get external URL:
+  kubectl get gateway url-shortener-gateway -o jsonpath='{.status.addresses[0].value}'
+Test:
+  curl <gateway-url>/health
+  curl -X POST <gateway-url>/shorten -H "Content-Type: application/json" -d '{"url":"https://example.com"}'

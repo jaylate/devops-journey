@@ -1,0 +1,22 @@
+replicaCount: 1
+
+image:
+  repository:  us-central1-docker.pkg.dev/PROJECT_ID/REPO_NAME/
+  name: url-shortener
+  pullPolicy: IfNotPresent
+  # tag: v0.1.0  # optional, defaults to appVersion
+
+service:
+  type: ClusterIP
+  port: 8000
+
+livenessProbe:
+  httpGet:
+    path: /health
+    port: http
+readinessProbe:
+  httpGet:
+    path: /health
+    port: http
+
+resources: {}
